@@ -1,6 +1,10 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Ejercicios.Confiabilidad;
+import Ejercicios.Area;
+import javax.swing.UIManager;
+import javax.swing.JFrame;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
@@ -16,17 +20,24 @@ public class Main {
         do{
             System.out.println("""
             Menú de ejercicios
-            1. Ejercicio 1
-            2. Ejercicio 2
-            3. Ejercicio 3
+            1. Confiabilidad del sistema
+            2. Área entre líneas
+            3. Frecuencia de números
             0. Salir
                     """);
             System.out.print("Opción: ");
             String option = sc.nextLine();
+            System.out.println();
 
             switch(option){
-                case "1"->Ejercicios.Confiabilidad.run(getPath());
-                case "2"->Ejercicios.Area.run(getPath());
+                case "1"-> {
+                    Confiabilidad confiabilidad = new Confiabilidad(getPath());
+                    //System.out.println(confiabilidad);
+                    System.out.println(confiabilidad.getConfiabilidad());
+                }
+                case "2"->{
+                    Area area = new Area(getPath());
+                }
                 case "3"->Ejercicios.Frecuencia.run();
                 case "0"->exit=true;
                 default-> {
@@ -34,11 +45,12 @@ public class Main {
                     sc.nextLine();
                 }
             }
-        } while(!exit);
 
+            sc.nextLine();
+        } while(!exit);
     }
 
-    private static String getPath(){
+    private static Path getPath(){
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception ignored) {
@@ -48,11 +60,12 @@ public class Main {
 
         JFrame frame = new JFrame();
         JFileChooser fileChooser = getjFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos del programa (.in)", "in"));
 
         fileChooser.addActionListener(e -> {
             frame.dispose();
             if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
-                sb.append(fileChooser.getSelectedFile().getAbsolutePath());
+                sb.append(fileChooser.getSelectedFile().getPath());
             }
         });
 
@@ -65,7 +78,9 @@ public class Main {
         frame.setAlwaysOnTop(true);
         frame.setVisible(true);
 
-        return sb.toString();
+        fileChooser.showOpenDialog(frame);
+;
+        return Path.of(sb.toString());
     }
 
     private static JFileChooser getjFileChooser() {
