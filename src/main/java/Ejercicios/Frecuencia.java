@@ -11,13 +11,13 @@ public class Frecuencia {
 
         for(int i=0;i<1000;++i){
             arreglo[i]=((int)(Math.random()*1000));
-            System.out.println(arreglo[i]);
         }
 
         int[] fr = new int[arreglo.length];
         int maxIdx = 0;
 
         for (int number : arreglo) {
+            System.out.print(number + " ; ");
             fr[number]++;
 
             if (fr[number] > fr[maxIdx]) {
@@ -25,7 +25,7 @@ public class Frecuencia {
             }
         }
 
-        System.out.println("Ejercicio de Frecuencia");
+        System.out.println("\n\nFRECUENCIA DE NÚMEROS");
         System.out.println("El elemento que más se repite es: " + maxIdx);
         System.out.println("Frecuencia de repetición: " + fr[maxIdx]);
     }

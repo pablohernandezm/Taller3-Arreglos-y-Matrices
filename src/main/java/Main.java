@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,6 @@ public class Main {
             switch(option){
                 case "1"-> {
                     Confiabilidad confiabilidad = new Confiabilidad(getPath());
-                    //System.out.println(confiabilidad);
                     System.out.println(confiabilidad.getConfiabilidad());
                 }
                 case "2"->{
@@ -47,7 +47,9 @@ public class Main {
                 }
             }
 
+            System.out.print("\nPresione enter para continuar...");
             sc.nextLine();
+            System.out.println("\n");
         } while(!exit);
     }
 
