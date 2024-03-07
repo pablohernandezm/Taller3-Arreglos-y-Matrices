@@ -64,16 +64,16 @@ public class Area {
     }
 
     private static class Triangle{
-        private final float[] slopes;
-        private final float[] intercepts;
+        private final float[] m;
+        private final float[] b;
 
         private double area;
         private final int index;
 
         public Triangle(String data, int index){
             this.index = index;
-            slopes = new float[3];
-            intercepts = new float[3];
+            m = new float[3];
+            b = new float[3];
 
             byte slopeIndex = 0;
             byte interceptIndex = 0;
@@ -81,8 +81,8 @@ public class Area {
             var rects = data.split(";");
             for (var rect: rects){
                 var parts = rect.split(",");
-                slopes[slopeIndex++] = Float.parseFloat(parts[0]);
-                intercepts[interceptIndex++] = Float.parseFloat(parts[1]);
+                m[slopeIndex++] = Float.parseFloat(parts[0]);
+                b[interceptIndex++] = Float.parseFloat(parts[1]);
             }
         }
 
@@ -95,8 +95,8 @@ public class Area {
             float[] y = new float[3];
 
             for (int i=0; i<3; i++){
-                x[i] = (intercepts[i]-intercepts[(i+1)%3])/(slopes[(i+1)%3]-slopes[i]);
-                y[i] = slopes[i]*x[i]+intercepts[i];
+                x[i] = (b[i]- b[(i+1)%3])/(m[(i+1)%3]- m[i]);
+                y[i] = m[i]*x[i]+ b[i];
             }
 
             this.area= Math.abs((x[0] * (y[1] - y[2]) + x[1] * (y[2] - y[0]) + x[2] * (y[0] - y[1])) / 2);

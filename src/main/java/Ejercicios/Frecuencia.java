@@ -7,21 +7,21 @@ package Ejercicios;
  */
 public class Frecuencia {
     public static void run() {
-        int[] arreglo = new int[1000];
+        int[] arreglo = new int[1000];//O(1)
 
-        for(int i=0;i<1000;++i){
-            arreglo[i]=((int)(Math.random()*1000));
+        for(int i=0;i<1000;++i){//BUCLE 1
+            arreglo[i]=((int)(Math.random()*1000));//O(1)
         }
 
-        int[] fr = new int[arreglo.length];
-        int maxIdx = 0;
+        int[] fr = new int[arreglo.length];//O(1)
+        int maxIdx = 0;//O(1)
 
-        for (int number : arreglo) {
-            System.out.print(number + " ; ");
-            fr[number]++;
+        for (int number : arreglo) {//BUCLE 2
+            System.out.print(number + " ; ");//O(1)
+            fr[number]++;//O(1)
 
-            if (fr[number] > fr[maxIdx]) {
-                maxIdx = number;
+            if (fr[number] > fr[maxIdx]) {//O(1)
+                maxIdx = number;//O(1)
             }
         }
 
