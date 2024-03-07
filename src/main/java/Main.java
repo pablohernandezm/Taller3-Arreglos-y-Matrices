@@ -37,6 +37,7 @@ public class Main {
                 }
                 case "2"->{
                     Area area = new Area(getPath());
+                    System.out.println(area);
                 }
                 case "3"->Ejercicios.Frecuencia.run();
                 case "0"->exit=true;

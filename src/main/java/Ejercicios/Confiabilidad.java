@@ -11,8 +11,7 @@ import java.util.Arrays;
 /**
  * Ejercicio de complejidad del sistema.
  * @author Pablo José Hernández Meléndez [0221910052]
- * @author Jorge David Junior Sierra Morales [0221910025]
- * @author Sergio Alejandro Severiche Guerrero [0222010041]
+ * @author Juan Camilo Narváez Torres [0221920007]
  */
 public class Confiabilidad {
     Sistema[] sistemas;
@@ -38,8 +37,8 @@ public class Confiabilidad {
     }
 
     private static class Sistema{
-        private byte unidades [][];
-        private double[] confiabilidad;
+        private final byte[][] unidades;
+        private final double[] confiabilidad;
 
         public Sistema(String systemData){
             var data = systemData.trim().split("\n");
@@ -80,26 +79,19 @@ public class Confiabilidad {
 
         public double calcularConfiabilidad(){
             double confiabilidad = 0.0;
-            //StringBuilder sb = new StringBuilder("\n");
 
             for (byte[] unidad : this.unidades) {
                 double producto = 1.0;
-
 
                 for (int j = 0; j < this.confiabilidad.length; j++) {
                     var p = this.confiabilidad[j];
                     var b = unidad[j];
 
                     producto *= Math.pow(p, b) * Math.pow(1 - p, 1 - b);
-                    //sb.append(String.format("p%s^{%s} * (1-p%s)^{1-%s} * ", j+1, b, j+1, b));
                 }
 
-                //sb.append(" + \n");
                 confiabilidad += producto;
             }
-
-            //sb.append("0 =").append(confiabilidad);
-            //System.out.println("Confiabilidad ecuación: "+sb);
 
             return confiabilidad;
         }
